@@ -11,14 +11,12 @@ import static org.mockito.Mockito.verify;
 
 public class BetterRadarTest {
 
-    private static int testTimeRun = 0;
-
     @Rule
     public RepeatRule repeatRule = new RepeatRule();
 
     @Test
     @Repeat(10)
-    public void testLauncherInTheSameThread() {
+    public void launchPatriotTenTimesWhenNoticeEnemyMissle() {
         PatriotBattery batteryMock = mock(PatriotBattery.class);
         Executor executor = new Executor() {
             @Override
@@ -32,7 +30,5 @@ public class BetterRadarTest {
         radar.notice(new Scud());
 
         verify(batteryMock, times(10)).launchPatriot();
-
-        System.out.println("Test run: "  + testTimeRun++);
     }
 }
